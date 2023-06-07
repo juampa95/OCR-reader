@@ -4,8 +4,11 @@ import time
 import tempfile
 import os
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# tesseract 5.3.3 (last version)
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
+# tesseract 3.5.0 (project version)
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR-3-5-0\tesseract.exe'
 
 def extact_text(img, cfg):
     if type(img) == str:
@@ -51,6 +54,8 @@ end_time = time.time()
 print(text)
 print(end_time - star_time)
 
+
+
 star_time = time.time()
 custom_config = f'--oem 3 --psm 4'
 image_path = 'img/set1/20230420141949.bmp'
@@ -79,3 +84,23 @@ prueba
 
 if '077933997052082' in prueba[0] and 'AUROLUO' in prueba[1] and '17/05/2026' in prueba[2]:
     print('exist')
+
+
+print(pytesseract.get_tesseract_version())
+
+
+custom_config = '--oem 3 --psm 4'
+image = Image.open('img/set1/20230420141949.bmp')
+text = pytesseract.image_to_string(image, config=custom_config)
+text
+
+print(text)
+
+star_time = time.time()
+custom_config = '--oem 3 --psm 4 -l OCR'
+image = Image.open('img/set1/20230420141949.bmp')
+text = pytesseract.image_to_string(image, config=custom_config)
+end_time = time.time()
+
+print(text)
+print(end_time-star_time)

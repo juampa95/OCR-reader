@@ -4,7 +4,11 @@ import time
 import tempfile
 import os
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# tesseract 5.3.3 (last version)
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# tesseract 3.5.0 (project version)
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR-3-5-0\tesseract.exe'
 
 
 def extact_text(img, cfg):
@@ -43,7 +47,7 @@ def img_transf(image_path, threshold, noise):
     return artifcat_remove_image
 
 
-custom_config = f'--oem 3 --psm 4'
+custom_config = '--oem 3 --psm 4 -l OCR'
 image_dir = 'img/set1'
 
 files = os.listdir(image_dir)
@@ -54,16 +58,18 @@ results = []
 for file in files:
     file_path = os.path.join(image_dir,file)
     if file.endswith('.bmp'):
-        text = extact_text(img_binary(file_path, 140)
-                           , custom_config)
+        start = time.time()
+        image = Image.open(file_path)
+        text = pytesseract.image_to_string(image, config=custom_config)
+        end = time.time()
         text = text.split('\n')
         text = list(filter(bool,text))
         if '07793397052082' in text[0] and 'AUROLUO' in text[1] and '17/05/2026' in text[2]:
             results.append('OK')
-            print('OK   ',text)
+            print('OK   ',end-start,text)
         else:
             results.append('ERROR')
-            print('ERROR',text)
+            print('ERROR',end-start,text)
 
 
 print(results)
