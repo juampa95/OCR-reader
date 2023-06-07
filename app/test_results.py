@@ -43,39 +43,27 @@ def img_transf(image_path, threshold, noise):
     return artifcat_remove_image
 
 
-star_time = time.time()
 custom_config = f'--oem 3 --psm 4'
-image_path = 'img/set1/20230420141949.bmp'
-text = extact_text(image_path, custom_config)
-end_time = time.time()
-print(text)
-print(end_time - star_time)
+image_dir = 'img/set1'
 
-star_time = time.time()
-custom_config = f'--oem 3 --psm 4'
-image_path = 'img/set1/20230420141949.bmp'
-text = extact_text(img_binary(image_path, 140)
-                   , custom_config)
-end_time = time.time()
-print(text)
-print(end_time - star_time)
+files = os.listdir(image_dir)
+len(files)
 
-star_time = time.time()
-custom_config = f'--oem 3 --psm 4'
-image_path = 'img/set1/20230420141949.bmp'
-text = extact_text(img_transf(image_path, 165,1)
-                   , custom_config)
-end_time = time.time()
-print(text)
-print(end_time - star_time)
+results = []
+
+for file in files:
+    file_path = os.path.join(image_dir,file)
+    if file.endswith('.bmp'):
+        text = extact_text(img_binary(file_path, 140)
+                           , custom_config)
+        text = text.split('\n')
+        text = list(filter(bool,text))
+        if '07793397052082' in text[0] and 'AUROLUO' in text[1] and '17/05/2026' in text[2]:
+            results.append('OK')
+            print('OK   ',text)
+        else:
+            results.append('ERROR')
+            print('ERROR',text)
 
 
-text
-prueba = text.split('\n')
-
-prueba = list(filter(bool,prueba))
-
-prueba
-
-if '077933997052082' in prueba[0] and 'AUROLUO' in prueba[1] and '17/05/2026' in prueba[2]:
-    print('exist')
+print(results)
