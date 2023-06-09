@@ -48,7 +48,7 @@ def img_transf(image_path, threshold, noise):
 
 star_time = time.time()
 custom_config = f'--oem 3 --psm 4'
-image_path = 'img/set1/20230420141949.bmp'
+image_path = 'img/set1/20230420162014.bmp'
 text = extact_text(image_path, custom_config)
 end_time = time.time()
 print(text)
