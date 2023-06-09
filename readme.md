@@ -27,3 +27,11 @@ rapido y más preciso. La idea de la nueva implementación, es mejorar ambos asp
 precisión manteniendo o mejorando la velocidad de procesado. 
 
 Para ser funcional, debe recibir la imagen, pre-procesarla y decodificarla en un máximo de 200 milisegundos. 
+
+---
+Actualización 08/06/23
+
+No será posible usar la version 3.5.0 de tesseract si quiero optimizar el proceso. Por lo que se proseguirá con 
+la última versión disponible y luego se evaluara modificar el software de los equipos para hacerlo compatible. 
+
+
