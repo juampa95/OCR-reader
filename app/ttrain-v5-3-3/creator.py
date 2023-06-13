@@ -5,7 +5,7 @@ import os
 directorio_padre = 'app/ttrain-v5-3-3'
 
 # Rutas de los directorios
-directorio_fotos = os.path.join(directorio_padre, 'fotos')
+directorio_fotos = os.path.join(directorio_padre, 'fotos1')
 directorio_gt = os.path.join(directorio_padre, 'ground-truth')
 
 # Enumerar y procesar las fotos
@@ -31,7 +31,9 @@ for archivo in os.listdir(directorio_fotos):
         with open(ruta_archivo_texto, 'w') as archivo_texto:
             # Los datos de la variable 'contenido' se cargaron manualmente, pero en un futuro se buscará
             # que los mismos provengan desde la base de datos SQL que los contiene.
-            contenido = "07793397052082,AUROLUO,17/05/2026,*"
+            # contenido = "07793397052082,AUROLUO,17/05/2026,*"  # Tuve errores al entrenar multi-lineas.
+            # contenido = "07793397052082"  # Tambien genero errores
+            contenido = "07793397052082 AUROLUO 17/05/2026"
             archivo_texto.write(contenido)
 
         # Incrementar el contador
